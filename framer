@@ -1,13 +1,24 @@
 #!/bin/bash
-# framefix 
-# Ale González, 2014
-# GPL v.3
+# framer
+# Copyright (c) 2014 Ale González
+# This software is free; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License version 2.1 as published by the Free Software Foundation. 
+# This software is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+ 
+# You should have received a copy of the GNU Lesser General
+# Public License along with this library; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+# Boston, MA 02111-1307 USA
 
 function displayHelp()
 {
 cat <<EOF
-        Usage:      frameadjust -f 20 -e jpeg -r
-        Purpose:    frameadjust is intended to adjust a sequence of images in order to create a video.
+        Usage:      framer -f 20 -e jpeg -r
+        Purpose:    framer is intended to adjust a sequence of images in order to create a video.
                      To do that it interpolates missing frames, removes unnecessary frames and creates a numeric sequence of files.
                      Images must be in the format 'second_frame-in-second.extension' in order to work properly.
 
