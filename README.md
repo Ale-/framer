@@ -1,5 +1,5 @@
 # framer
-framer is intended to adjust a sequence of images in order to create a video with a fixed framerate. To do that it interpolates missing frames, removes unnecessary frames and creates a numeric sequence of files. Images must be in the format 'second_frame-in-second.extension' in order to work properly.
+framer is intended to adjust a sequence of images in order to create a video with a fixed framerate. To do that it interpolates missing frames, removes unnecessary frames and creates a numeric sequence of files. Images must be in the format 'second_frame-in-second.extension' in order to work properly. For example `1_15.tga` would be the 15th frame in the first second. 
 
 ## Usage
 Use it doing, for example:
