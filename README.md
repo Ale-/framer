@@ -9,13 +9,13 @@ framer -f 20 -e jpeg -r
 This way you'd create a lineal numbered sequence from 1.jpg to (end).jpg intended to create a video with a fixed framerate of 20 fps.
 
 ### Parameters
-* h        
+* `-h`        
 Show help
-* f [NUM]  
+* `-f [NUM]`  
 Sets input framerate. Default is 24.
-* e [STR]  
+* `-e [STR]`  
 Sets extension. Enter the extension without the period. Default is tga.      
-* r        
+*  `-r`        
 Create a numbered lineal sequence from '1.extension' to 'end.extension'
 
 ## Install
