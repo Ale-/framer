@@ -1,0 +1,85 @@
+#!/bin/bash
+# framefix 
+# Ale González, 2014
+# GPL v.3
+
+function displayHelp()
+{
+cat <<EOF
+        Usage:      frameadjust -f 20 -e jpeg -r
+        Purpose:    frameadjust is intended to adjust a sequence of images in order to create a video.
+                     To do that it interpolates missing frames, removes unnecessary frames and creates a numeric sequence of files.
+                     Images must be in the format 'second_frame-in-second.extension' in order to work properly.
+
+          -h        Show HELP (this output)
+          -f [NUM]
+                    Sets input framerate. Default is 24.
+          -e [STR]   
+                    Sets extension. Enter the extension without the period. Default is tga.      
+          -r     
+                    Create a final sequence from '1.extension' to 'end.extension'
+EOF
+}
+
+rename=false
+framerate=24
+extension=tga
+
+while getopts :f:e:idrh option
+do
+    case "$option" in
+	    f)
+		 framerate=$OPTARG
+		 ;;
+	    e)
+		 extension=$OPTARG
+		 ;;
+        r)
+         rename=true
+	     ;;
+        h)
+		 displayHelp
+         exit
+	     ;;
+	    *)
+		 echo Invalid option -$OPTARG
+		 echo 
+		 displayHelp
+		 exit 1
+		 ;;
+	    ?)
+         echo This command needs an option
+		 echo 
+		 displayHelp
+		 exit 1
+		 ;;
+    esac
+done
+if [ $OPTIND -eq 0 ]; then 
+        echo No options were passed
+        echo    
+        displayHelp
+        exit
+fi
+
+seconds=`ls | sort -n | tail -1 | cut -d '_' -f1`
+frameindex=1
+
+for ((i=0; i<=$seconds; i++)); do 
+    a=`ls | grep -c ^${i}_`
+    if [ $a -lt $framerate ]; then
+        for ((b=$a+1; b<=$framerate; b++)); do
+            cp ${i}_${a}.${extension} ${i}_${b}.${extension}
+        done
+    elif [ $a -gt $framerate ]; then
+        for ((b=$a; b>$framerate; b--)); do
+            rm ${i}_${a}.${extension}
+        done
+    fi
+    if [ $rename = true ]; then
+        for ((j=1; j<=$framerate; j++)); do
+            mv ${i}_${j}.${extension} ${frameindex}.${extension}
+	    let frameindex+=1
+	done
+    fi
+done
